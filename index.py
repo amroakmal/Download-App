@@ -22,13 +22,13 @@ class MainApp(QMainWindow, FORM_CLASS):
         self.setFixedSize(700, 300)
 
     def HandelButtons(self):
-        self.pushButton.clicked.connect(self.HandelStartDownload)
-        self.pushButton_2.clicked.connect(self.HandelBrowse)
+        self.startDownloadButton.clicked.connect(self.HandelStartDownload)
+        self.browseButton.clicked.connect(self.HandelBrowse)
 
     def HandelBrowse(self):
         save_path = QFileDialog.getSaveFileName(self, caption="Save As", directory=".",
                                                 filter="All Files (*.*)")
-        self.lineEdit_2.setText(save_path[0])
+        self.saveLocationLineEdit.setText(save_path[0])
 
     def HandelProgressBar(self, blockNumber, blockSize, totalSize):
         readSoFar = blockNumber * blockSize
@@ -36,8 +36,8 @@ class MainApp(QMainWindow, FORM_CLASS):
         self.progressBar.setValue(readPercentage)
 
     def HandelStartDownload(self):
-        url = self.lineEdit_3.text()
-        save_path = self.lineEdit_2.text()
+        url = self.urlLineEdit.text()
+        save_path = self.saveLocationLineEdit.text()
 
         try:
             urllib.request.urlretrieve(url, save_path, self.HandelProgressBar)
@@ -47,8 +47,8 @@ class MainApp(QMainWindow, FORM_CLASS):
 
         QMessageBox.information(self, "Download Completed", "Finished Downloading")
         self.progressBar.setValue(0)
-        self.lineEdit_2.setText("")
-        self.lineEdit_3.setText("")
+        self.saveLocationLineEdit.setText("")
+        self.urlLineEdit.setText("")
 
 
 def main():

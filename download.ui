@@ -2191,7 +2191,7 @@ PlotWidget {
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="startDownloadButton">
     <property name="geometry">
      <rect>
       <x>220</x>
@@ -2207,7 +2207,7 @@ PlotWidget {
      <string>Start Download</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="saveLocationLineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -2230,7 +2230,7 @@ PlotWidget {
      <string>Enter URL</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="browseButton">
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -2243,7 +2243,7 @@ PlotWidget {
      <string>Browse</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="urlLineEdit">
     <property name="geometry">
      <rect>
       <x>120</x>
