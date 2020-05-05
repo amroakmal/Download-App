@@ -1,7 +1,7 @@
 import sys
 import urllib.request
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QFileDialog
 from PyQt5.uic import loadUiType
 
 from os import path
@@ -27,17 +27,24 @@ class MainApp(QMainWindow, FORM_CLASS):
     def HandelBrowse(self):
         pass
 
-    def HandelProgressBar(self):
-        pass
+    def HandelProgressBar(self, blockNumber, blockSize, totalSize):
+        readSoFar = blockNumber * blockSize
+        readPercentage = readSoFar * 100 / totalSize
+        self.progressBar.setValue(readPercentage)
 
     def HandelStartDownload(self):
         url = self.lineEdit_3.text()
+        self.HandelBrowse()
         save_path = self.lineEdit_2.text()
-        urllib.request.urlretrieve(url, save_path, self.HandelProgressBar)
 
-        QMessageBox.Information(self, "Download Completed", "Finished Downloading")
+        try:
+            urllib.request.urlretrieve(url, save_path, self.HandelProgressBar)
+        except Exception:
+            QMessageBox.warning(self, "Error Occurred!", "Check the URL")
+            return
 
-        self.progressBar.setvalue(0)
+        QMessageBox.information(self, "Download Completed", "Finished Downloading")
+        self.progressBar.setValue(0)
         self.lineEdit_2.setText("")
         self.lineEdit_3.setText("")
 
