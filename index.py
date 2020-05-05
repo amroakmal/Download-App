@@ -1,6 +1,7 @@
 import sys
+import urllib.request
 
-from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 from PyQt5.uic import loadUiType
 
 from os import path
@@ -13,18 +14,32 @@ class MainApp(QMainWindow, FORM_CLASS):
         super(MainApp, self).__init__(parent)
         QMainWindow.__init__(self)
         self.setupUi(self)
+        self.HandelUIChanges()
+        self.HandelButtons()
 
-    def Handle_Buttons(self):
+    def HandelUIChanges(self):
+        self.setWindowTitle("You-Downloader")
+        self.setFixedSize(700, 300)
+
+    def HandelButtons(self):
+        self.pushButton.clicked.connect(self.HandelStartDownload)
+
+    def HandelBrowse(self):
         pass
 
-    def HandleBrowse(self):
+    def HandelProgressBar(self):
         pass
 
-    def HandleProgressBar(self):
-        pass
+    def HandelStartDownload(self):
+        url = self.lineEdit_3.text()
+        save_path = self.lineEdit_2.text()
+        urllib.request.urlretrieve(url, save_path, self.HandelProgressBar)
 
-    def HandleStartDownload(self):
-        pass
+        QMessageBox.Information(self, "Download Completed", "Finished Downloading")
+
+        self.progressBar.setvalue(0)
+        self.lineEdit_2.setText("")
+        self.lineEdit_3.setText("")
 
 
 def main():
