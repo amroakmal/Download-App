@@ -23,9 +23,12 @@ class MainApp(QMainWindow, FORM_CLASS):
 
     def HandelButtons(self):
         self.pushButton.clicked.connect(self.HandelStartDownload)
+        self.pushButton_2.clicked.connect(self.HandelBrowse)
 
     def HandelBrowse(self):
-        pass
+        save_path = QFileDialog.getSaveFileName(self, caption="Save As", directory=".",
+                                                filter="All Files (*.*)")
+        self.lineEdit_2.setText(save_path[0])
 
     def HandelProgressBar(self, blockNumber, blockSize, totalSize):
         readSoFar = blockNumber * blockSize
@@ -34,7 +37,6 @@ class MainApp(QMainWindow, FORM_CLASS):
 
     def HandelStartDownload(self):
         url = self.lineEdit_3.text()
-        self.HandelBrowse()
         save_path = self.lineEdit_2.text()
 
         try:
@@ -58,4 +60,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
